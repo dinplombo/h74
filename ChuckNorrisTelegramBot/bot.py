@@ -29,11 +29,17 @@ def sign_handler(message):
 
 
 def joke_handler(message, languge):
-    js = Jokes()
-    text = js.fetch_joke(message.text)
-    tr = Translator()
-
-    bot.send_message(message.chat.id, tr.translate(languge, text))
+    if(message.text.isdigit() == False):
+        sign_handler(message)
+    if(0 > int(message.text) or int(message.text) > 100):
+        sent_msg = bot.send_message(message.chat.id, 'joke number is between 1 - 100')
+        bot.register_next_step_handler(sent_msg, joke_handler, languge)
+    else:
+        js = Jokes()
+        text = js.fetch_joke(message.text)
+        tr = Translator()
+        sent_msg = bot.send_message(message.chat.id, tr.translate(languge, text))
+        bot.register_next_step_handler(sent_msg, joke_handler, languge)
     
 
 bot.infinity_polling()
