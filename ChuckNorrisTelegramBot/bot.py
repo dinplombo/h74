@@ -20,6 +20,7 @@ def sign_handler(message):
     s = Singleton.get_instance()   
     languges = s.get_table()
     lower_languge = message.text.lower()
+
     for languge in languges:
         if languge in lower_languge:
             sent_msg = bot.send_message(message.chat.id, 'no problem') 
@@ -27,7 +28,6 @@ def sign_handler(message):
             return
     
     bot.send_message(message.chat.id, 'this languge is nonexistent')
-
 
 def joke_handler(message, languge):
     if(message.text.isdigit() == False):

@@ -8,7 +8,6 @@ class Jokes:
 
         # Parsing the HTML 
         soup = BeautifulSoup(r.content, 'html.parser') 
-
         s = soup.find('div', class_= "entry-content template-color-red")
         this.lines = s.find_all('li') 
 

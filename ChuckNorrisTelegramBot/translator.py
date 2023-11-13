@@ -29,8 +29,6 @@ class Translator:
 
     request = requests.post(this.constructed_url, params=params, headers=this.headers, json=body)
     response = request.json()
-
-    
     translated_text = response[0]['translations'][0]['text']
     return translated_text
 
