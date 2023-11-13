@@ -2,6 +2,7 @@ import os
 import telebot
 import os
 import json
+import time
 
 from dotenv import load_dotenv
 from translator import Translator
@@ -41,5 +42,8 @@ def joke_handler(message, languge):
         sent_msg = bot.send_message(message.chat.id, tr.translate(languge, text))
         bot.register_next_step_handler(sent_msg, joke_handler, languge)
     
-
-bot.infinity_polling()
+while True:
+    try:
+        bot.infinity_polling()
+    except Exception:
+        time.sleep(15)
